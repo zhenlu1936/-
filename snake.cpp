@@ -105,20 +105,10 @@ void frame() {
 void runloop() {
 	while (!do_tick()) {
 		usleep(10000);
-		//Sleep(10);
 		if (turnw()) break;
 		frame();
 	}
 }
-
-/*void SetConsoleWindowSize(SHORT width, SHORT height)
-{
-	HANDLE hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-	SMALL_RECT wrt = { 0, 0, width - 1, height - 1 };
-	SetConsoleWindowInfo(hStdOutput, TRUE, &wrt); // 设置窗体尺寸
-	COORD coord = { width, height };
-	SetConsoleScreenBufferSize(hStdOutput, coord); // 设置缓冲尺寸
-}*/
 
 int main() {
 	srand(time(0));
@@ -128,7 +118,6 @@ int main() {
 	init_pair(2, COLOR_BLUE, 0);
 	birth();
 	resizeterm(Y + 2, X * 2 + 2);
-	//SetConsoleWindowSize(Y + 2, X * 2 + 2);
 	noecho();
 	timeout(0);
 	curs_set(0);
