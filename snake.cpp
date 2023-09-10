@@ -3,16 +3,15 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-//#include <windows.h>
-#define X 32		//´°¿Úºá¿í
-#define Y 20		//´°¿Ú×İ¿í
-#define FOD 1		//Ê³Îï´úÂë
-#define HED 2		//ÉíÌå´úÂë
+#define X 32		//çª—å£æ¨ªå®½
+#define Y 20		//çª—å£çºµå®½
+#define FOD 1		//é£Ÿç‰©ä»£ç 
+#define HED 2		//èº«ä½“ä»£ç 
 
 int board[Y][X], turn[Y + 1][X], forward[5][2] = { {0,0}, {-1,0},{0,-1},{1,0},{0,1} };
 int p = 0, c = 0, tick = 0, flag = 0, prefwd = 0, length = 0, head[2], end[2], endfwd, food[2];
 
-//Ëæ»ú²úÉúĞÂÊ³Îï
+//éšæœºäº§ç”Ÿæ–°é£Ÿç‰©
 void new_food() {
 	do {
 		food[0] = rand() % Y;
@@ -21,7 +20,7 @@ void new_food() {
 	board[food[0]][food[1]] = FOD;
 }
 
-//³öÉú
+//å‡ºç”Ÿ
 void birth() {
 	end[0] = head[0] = rand() % Y;
 	end[1] = head[1] = rand() % X;
@@ -32,7 +31,7 @@ void birth() {
 	new_food();
 }
 
-//ÒÆ¶¯Í·²¿Ç°½ø£¬´´ÔìÒ»¸ñ
+//ç§»åŠ¨å¤´éƒ¨å‰è¿›ï¼Œåˆ›é€ ä¸€æ ¼
 int moh() {
 	head[0] = (head[0] + forward[p][0] + Y) % Y;
 	head[1] = (head[1] + forward[p][1] + X) % X;
@@ -43,7 +42,7 @@ int moh() {
 	return 0;
 }
 
-//ÒÆ¶¯Î²²¿Ç°½ø£¬ÏûÈ¥Ò»¸ñ
+//ç§»åŠ¨å°¾éƒ¨å‰è¿›ï¼Œæ¶ˆå»ä¸€æ ¼
 void moe() {
 	if (length == 1) endfwd = p;
 	board[end[0]][end[1]] = 0;
@@ -52,7 +51,7 @@ void moe() {
 	endfwd = turn[end[0]][end[1]];
 }
 
-//ÅĞ¶¨³ÔÊ³Îï
+//åˆ¤å®šåƒé£Ÿç‰©
 void eat() {
 	if (head[0] == food[0] && head[1] == food[1]) {
 		length++;
@@ -63,7 +62,7 @@ void eat() {
 	}
 }
 
-//¼üÅÌÊäÈë
+//é”®ç›˜è¾“å…¥
 int turnw() {
 	char c = getch();
 	if (c == 'w' && prefwd != 3) p = 1;
@@ -75,7 +74,7 @@ int turnw() {
 	return 0;
 }
 
-//Ê±ÖÓ£¬ËæÊ±¼äÔö¼ÓÄÑ¶È
+//æ—¶é’Ÿï¼Œéšæ—¶é—´å¢åŠ éš¾åº¦
 int do_tick() {
 	if (++tick > 30 - length) {
 		flag = 0;
@@ -87,7 +86,7 @@ int do_tick() {
 	return 0;
 }
 
-//¸øÓÎÏ·ÉÏÉ«
+//ç»™æ¸¸æˆä¸Šè‰²
 void frame() {
 	for (int i = 1; i <= Y; i++) {
 		move(i, 1);
@@ -102,7 +101,7 @@ void frame() {
 	refresh();
 }
 
-//ÓÎÏ·Ö÷Ñ­»·
+//æ¸¸æˆä¸»å¾ªç¯
 void runloop() {
 	while (!do_tick()) {
 		usleep(10000);
@@ -116,9 +115,9 @@ void runloop() {
 {
 	HANDLE hStdOutput = GetStdHandle(STD_OUTPUT_HANDLE);
 	SMALL_RECT wrt = { 0, 0, width - 1, height - 1 };
-	SetConsoleWindowInfo(hStdOutput, TRUE, &wrt); // ÉèÖÃ´°Ìå³ß´ç
+	SetConsoleWindowInfo(hStdOutput, TRUE, &wrt); // è®¾ç½®çª—ä½“å°ºå¯¸
 	COORD coord = { width, height };
-	SetConsoleScreenBufferSize(hStdOutput, coord); // ÉèÖÃ»º³å³ß´ç
+	SetConsoleScreenBufferSize(hStdOutput, coord); // è®¾ç½®ç¼“å†²å°ºå¯¸
 }*/
 
 int main() {
